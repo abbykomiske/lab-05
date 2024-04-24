@@ -22,40 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -81,7 +47,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#data-description" id="toc-data-description" class="nav-link active" data-scroll-target="#data-description">Data description</a></li>
+  <li><a href="#assessment" id="toc-assessment" class="nav-link active" data-scroll-target="#assessment">Assessment</a></li>
   </ul>
 </nav>
 </div>
@@ -113,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 28, 2024</p>
+      <p class="date-modified">April 24, 2024</p>
     </div>
   </div>
     
@@ -122,42 +88,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="data-description" class="level2">
-<h2 class="anchored" data-anchor-id="data-description">Data description</h2>
-<!--
-
-the nature of the data
-  - the source of the data
-  - the acquisition strategy that will be used
-  - the format of the data
-  - the license of the data
-  
--->
-<p>The data that I am downloaidng is the Switchboard Dialog Act Corpus. This corpus is a set of interviews.</p>
-<p>The data is in an archived file on the <a href="https://catalog.ldc.upenn.edu/docs/LDC97S62">LDC</a>. In this case, I am going to download, unarchive, and save the contents of teh corpus to the ‘data/original/swda’ / directory.</p>
-<!-- Note to self: the path from the current file is: '../data/original/swda' -->
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| Load packages </span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The first step in the process it to try out using ‘download.file()’ to acquire the archived file.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|label: download-archive-test</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># URL : https://catalog.ldc.upenn.edu/docs/LDC97S62/swb1_dialogact_annot.tar.gz</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set 'url' to the file address </span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>file_url <span class="ot">&lt;-</span> <span class="st">"https://catalog.ldc.upenn.edu/docs/LDC97S62/swb1_dialogact_annot.tar.gz"</span> </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>dest_directory <span class="ot">&lt;-</span> <span class="st">"../data/original/swda.tar.gz"</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span> (<span class="at">url =</span> file_url, <span class="at">destfile =</span> dest_directory)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>now the file is at ‘../data/original/swda.tar.gz’. Since it is an archived file, I will need to unarchive it. It’s extension is ‘tar.gz’ so I will use the ‘untar()’ function from the base R.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">untar</span>(<span class="at">tarfile =</span> <span class="st">"../data/original/swda.tar.gz"</span>, <span class="at">exdir =</span> <span class="st">",,/data/original/swda/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>In substitution of the lab goals, my assessment of lab 5 is below.</p>
+<section id="assessment" class="level2">
+<h2 class="anchored" data-anchor-id="assessment">Assessment</h2>
+<p>In lab 5, we went over harvesting data for text analysis, which pertained to identifying data sources such as CORPUS, acquiring data with database access like API, and documenting data with research scaffolding. We learned about the criteria for ‘good’ data, which includes quality, availability, accessibility (with usage rights), and data formatting. These goals for data harvesting with R are important for empirical research that is reproducible with the data origin file. In the lab, we described the data and began to go over the data collection process when we had to stop because we realized that the packages would not run on those with Macs, myself included. However, in reviewing the other steps that we would have taken in the lab, including ensuring it was reproducible and displaying the data origin file as a table, I still understand the major takeaways of the lab.</p>
+<p>Clearly, the major challenge of the lab was the coding itself. That proved frustrating for everyone in the class, but I think that we all did a good job of taking it in as we went. Obviously we would have all preferred for that not to happen, but that’s a part of learning and coding, but especially of life! I am happy we continued on and adjusted as needed so that we could keep the big picture of the class in mind. I think this adjustment actually helped me more than if we continued the way we had been.</p>
 </section>
 
 </main>

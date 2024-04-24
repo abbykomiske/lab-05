@@ -8,69 +8,10 @@ format:
     toc: true
 ---
 
-## Data description 
+In substitution of the lab goals, my assessment of lab 5 is below. 
 
-<!--
+## Assessment 
 
-the nature of the data
-  - the source of the data
-  - the acquisition strategy that will be used
-  - the format of the data
-  - the license of the data
-  
--->
+In lab 5, we went over harvesting data for text analysis, which pertained to identifying data sources such as CORPUS, acquiring data with database access like API, and documenting data with research scaffolding. We learned about the criteria for ‘good’ data, which includes quality, availability, accessibility (with usage rights), and data formatting. These goals for data harvesting with R are important for empirical research that is reproducible with the data origin file. In the lab, we described the data and began to go over the data collection process when we had to stop because we realized that the packages would not run on those with Macs, myself included. However, in reviewing the other steps that we would have taken in the lab, including ensuring it was reproducible and displaying the data origin file as a table, I still understand the major takeaways of the lab. 
 
-The data that I am downloaidng is the Switchboard Dialog Act Corpus. This corpus is a set of interviews. 
-
-The data is in an archived file on the [LDC](https://catalog.ldc.upenn.edu/docs/LDC97S62). In this case, I am going to download, unarchive, and save the contents of teh corpus to the 'data/original/swda' / directory. 
-
-<!-- Note to self: the path from the current file is: '../data/original/swda' -->
-
-```{r}
-#| label: setup-packages
-#| message: false 
-
-#| Load packages 
-library(dplyr)
-library(fs)
-
-```
-
-The first step in the process it to try out using 'download.file()' to acquire the archived file.
-
-```{r}
-#|label: download-archive-test
-
-# URL : https://catalog.ldc.upenn.edu/docs/LDC97S62/swb1_dialogact_annot.tar.gz
-
-# Set 'url' to the file address 
-file_url <- "https://catalog.ldc.upenn.edu/docs/LDC97S62/swb1_dialogact_annot.tar.gz" 
-
-dest_directory <- "../data/original/swda.tar.gz"
-
-download.file (url = file_url, destfile = dest_directory)
-
-```
-
-Now the file is at '../data/original/swda.tar.gz'. Since it is an archived file, I will need to unarchive it. It's extension is 'tar.gz' so I will use the 'untar()' function from the base R. 
-
-```{r}
-#| label: unarchive-tes 
-
-untar(tarfile = "../data/original/swda.tar.gz", exdir = "../data/original/swda/")
-
-```
-
-
-## Displaying the data
-
-Now I can display the data as a table. 
-
-```{r}
-qtalrkit :: create_data_origin ()
-```
-
-
-
-
-
+Clearly, the major challenge of the lab was the coding itself. That proved frustrating for everyone in the class, but I think that we all did a good job of taking it in as we went. Obviously we would have all preferred for that not to happen, but that's a part of learning and coding, but especially of life! I am happy we continued on and adjusted as needed so that we could keep the big picture of the class in mind. I think this adjustment actually helped me more than if we continued the way we had been.  
